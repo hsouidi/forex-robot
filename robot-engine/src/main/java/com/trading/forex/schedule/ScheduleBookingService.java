@@ -5,15 +5,5 @@ package com.trading.forex.schedule;
  */
 public interface ScheduleBookingService {
 
-    Boolean getRunBooking();
-
-    void setRunBooking(Boolean runBooking);
-
-    public void runStrategy() throws Exception;
-
-    String getMode();
-
-    double getUnit();
-
-    void setUnit(double unit);
+    void runStrategy() throws Exception;
 }

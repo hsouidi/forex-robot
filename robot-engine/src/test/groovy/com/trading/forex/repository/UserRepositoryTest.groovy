@@ -1,10 +1,8 @@
 package com.trading.forex.repository
 
-import com.oanda.v20.instrument.CandlestickGranularity
-import com.trading.forex.RobotApp
-import Symbol
+import com.trading.forex.SpringTestConfig
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.jdbc.Sql
 import org.springframework.test.context.jdbc.SqlGroup
 import spock.lang.Specification
@@ -12,8 +10,7 @@ import spock.lang.Specification
 import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.AFTER_TEST_METHOD
 import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.BEFORE_TEST_METHOD
 
-@SpringBootTest(
-        classes = RobotApp.class)
+@ContextConfiguration(classes =  SpringTestConfig.class)
 @SqlGroup([
         @Sql(scripts = "classpath:sql/user-insert.sql", executionPhase = BEFORE_TEST_METHOD),
         @Sql(scripts = "classpath:sql/user-rollback.sql", executionPhase = AFTER_TEST_METHOD)

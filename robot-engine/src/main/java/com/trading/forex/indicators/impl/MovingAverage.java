@@ -2,11 +2,11 @@ package com.trading.forex.indicators.impl;
 
 import com.tictactec.ta.lib.Core;
 import com.tictactec.ta.lib.MInteger;
-import com.trading.forex.common.utils.CustomList;
-import com.trading.forex.indicators.IndicatorUtils;
 import com.trading.forex.common.model.Candle;
 import com.trading.forex.common.model.Symbol;
 import com.trading.forex.common.model.Way;
+import com.trading.forex.common.utils.CustomList;
+import com.trading.forex.indicators.IndicatorUtils;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Collections;
@@ -72,19 +72,21 @@ public class MovingAverage extends IndicatorUtils {
         return result;
     }
 
-    public static CustomList<Integer> getCrossList(double[] outMin, double[] outMax, Way way, Symbol symbol) {
+    public static CustomList<Integer> getCrossList(final List<Candle> candles,int min, int max, Way way, Symbol symbol) {
 
-        int currentEma6 = getIndex(outMin);
-        int currentEma24 = getIndex(outMax);
-        int decalage = currentEma6 - currentEma24;
+        double[] outMin=valuesEma(candles,min);
+        double[] outMax=valuesEma(candles,max);
+        int currentMovingAverageMin = getIndex(outMin);
+        int currentMovingAverageMax = getIndex(outMax);
+        int decalage = currentMovingAverageMin - currentMovingAverageMax;
         final CustomList<Integer> result = new CustomList<>();
-        for (int i = currentEma6; i > decalage; i--) {
+        for (int i = currentMovingAverageMin; i > decalage; i--) {
             double anglePrec = toPip(symbol, way.getValue()
                     * Double.valueOf((outMin[i - 1] - outMax[i - decalage - 1])));
             double angleNext = toPip(symbol, way.getValue()
                     * Double.valueOf((outMin[i] - outMax[i - decalage])));
             if (anglePrec < 0D && angleNext > 0D) {
-                result.add(currentEma6 - i);
+                result.add(currentMovingAverageMin - i);
             }
         }
         Collections.reverse(result);
@@ -103,6 +105,15 @@ public class MovingAverage extends IndicatorUtils {
         MInteger length = new MInteger();
         double[] out = new double[candles.size()];
         double[] closePrice = candles.stream().mapToDouble(candle -> candle.getClose()).toArray();
+        core.ema(0, closePrice.length - 1, closePrice, periode, begin, length, out);
+        return out;
+    }
+
+    public static double[] valuesEma(double[] closePrice, int periode) {
+        Core core = new Core();
+        MInteger begin = new MInteger();
+        MInteger length = new MInteger();
+        double[] out = new double[closePrice.length];
         core.ema(0, closePrice.length - 1, closePrice, periode, begin, length, out);
         return out;
     }

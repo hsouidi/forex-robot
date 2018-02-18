@@ -1,0 +1,1 @@
+cd c:/projects/forex-robot & mvn clean install & java -Xms512m -Xmx2G -jar -Dspring.profiles.active=dev ./robot-engine/target/robot-engine-1.0-SNAPSHOT.jar

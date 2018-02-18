@@ -45,8 +45,15 @@ public class OandaPositionServiceImpl implements PositionService {
                 .collect(Collectors.toList());
     }
 
-    private Symbol fromIntrumentName(String instrumentName){
-        return Symbol.valueOf(instrumentName);
+    @Override
+    public List<Position> getOpenedPositions(final Symbol symbol) {
+        final List<Position> positions = getOpenedPositions();
+        positions.removeIf(pos -> pos.getSymbol() != symbol);
+        return positions;
+    }
+
+    private Symbol fromIntrumentName(String instrumentName) {
+        return Symbol.fromBrokerValue(instrumentName);
     }
 
     private Position toPosition(com.oanda.v20.position.Position position) {
@@ -55,8 +62,8 @@ public class OandaPositionServiceImpl implements PositionService {
                 .unrealizedPL(position.getUnrealizedPL().doubleValue())
                 .resettablePL(position.getResettablePL().doubleValue())
                 .commission(position.getCommission().doubleValue())
-                .longValue(position.getLong().getAveragePrice()!=null?position.getLong().getAveragePrice().doubleValue():null)
-                .shortValue(position.getShort().getAveragePrice()!=null?position.getShort().getAveragePrice().doubleValue():null)
+                .longValue(position.getLong().getUnits() != null ? position.getLong().getUnits().doubleValue() : null)
+                .shortValue(position.getShort().getUnits() != null ? position.getShort().getUnits().doubleValue() : null)
                 .symbol(fromIntrumentName(position.getInstrument().toString()))
                 .build();
     }
@@ -67,8 +74,15 @@ public class OandaPositionServiceImpl implements PositionService {
     }
 
     @Override
+    public Boolean closeOpenedPosition(final List<Position> positions) {
+
+        positions.parallelStream().forEach(position -> closeOpenedPosition(position));
+        return true;
+    }
+
+    @Override
     public Boolean closeOpenedPosition(Position position) {
-        PositionCloseRequest positionCloseRequest = new PositionCloseRequest(accountID, new InstrumentName(position.getSymbol().name()));
+        PositionCloseRequest positionCloseRequest = new PositionCloseRequest(accountID, new InstrumentName(position.getSymbol().getBrokerValue()));
         Double shortUnit = position.getShortValue();
         Double longUnit = position.getLongValue();
         if (shortUnit < 0) {

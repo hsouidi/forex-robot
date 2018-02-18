@@ -2,9 +2,9 @@ package com.trading.forex.indicators.impl;
 
 import com.tictactec.ta.lib.Core;
 import com.tictactec.ta.lib.MInteger;
-import com.trading.forex.indicators.IndicatorUtils;
 import com.trading.forex.common.model.Candle;
 import com.trading.forex.common.model.Way;
+import com.trading.forex.indicators.IndicatorUtils;
 
 import java.util.List;
 
@@ -30,9 +30,9 @@ public class RSI extends IndicatorUtils {
 
     public static boolean check(List<Candle> candles, int periode,Way way){
         double value=getValue(values(candles,periode));
-        if( Way.CALL.equals(way)){
+        if( Way.BUY.equals(way)){
             return value<80;
-        } else  if( Way.PUT.equals(way)){
+        } else  if( Way.SELL.equals(way)){
             return value>30;
         }
         return false;

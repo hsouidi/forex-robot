@@ -1,4 +1,6 @@
-*.jar
+*.iml
+**/*.csv
+reports/
 target/
 .idea/
 logs/

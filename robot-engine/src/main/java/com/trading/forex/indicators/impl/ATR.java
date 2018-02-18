@@ -2,8 +2,8 @@ package com.trading.forex.indicators.impl;
 
 import com.tictactec.ta.lib.Core;
 import com.tictactec.ta.lib.MInteger;
-import com.trading.forex.indicators.IndicatorUtils;
 import com.trading.forex.common.model.Candle;
+import com.trading.forex.indicators.IndicatorUtils;
 
 import java.util.List;
 
@@ -25,7 +25,15 @@ public class ATR extends IndicatorUtils {
         return out;
     }
 
+    public static double[] valuesCustom(List<Candle> candles, int period) {
+        ATRCustom atrCustom=new ATRCustom();
+        return atrCustom.OnCalculate(candles.stream().mapToDouble(candle -> candle.getHigh()).toArray(),
+                candles.stream().mapToDouble(candle -> candle.getLow()).toArray(),
+                candles.stream().mapToDouble(candle -> candle.getClose()).toArray());
+
+    }
+
     public static Double value(List<Candle> candles, int periode) {
-        return getValue(values(candles, periode));
+        return getValue(valuesCustom(candles, periode));
     }
 }

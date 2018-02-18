@@ -37,6 +37,7 @@ public class OandaConfiguration {
     public Account account(){
         try {
             return context().account.get(accountID()).getAccount();
+           // return new Account();
         } catch (Exception e) {
             throw new RobotTechnicalException(e);
         }

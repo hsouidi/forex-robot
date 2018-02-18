@@ -1,0 +1,605 @@
+[
+  {
+    "market": "0.200",
+    "actual": "-3.500",
+    "region": "europe",
+    "currency": "EUR",
+    "forecast": "-0.5",
+    "previous": "1.200",
+    "unit": "% m/m",
+    "timestamp": 1581058800,
+    "title": "Industrial Production",
+    "impact": 2
+  },
+  {
+    "market": "3.500",
+    "actual": "3.600",
+    "region": "americas",
+    "currency": "USD",
+    "forecast": "3.5",
+    "previous": "3.500",
+    "unit": "%",
+    "timestamp": 1581082200,
+    "title": "Unemployment",
+    "impact": 3
+  },
+  {
+    "market": "165",
+    "actual": "225",
+    "region": "americas",
+    "currency": "USD",
+    "forecast": "180",
+    "previous": "147",
+    "unit": "k",
+    "timestamp": 1581082200,
+    "title": "Non-farm Payrolls",
+    "impact": 3
+  },
+  {
+    "currency": "USD",
+    "unit": "",
+    "timestamp": 1581091200,
+    "region": "americas",
+    "title": "Fed releases semi-annual monetary policy report",
+    "impact": 2
+  },
+  {
+    "currency": "USD",
+    "unit": "",
+    "timestamp": 1581433200,
+    "region": "americas",
+    "title": "Fed's Powell testifies to House on monetary policy",
+    "impact": 3
+  },
+  {
+    "currency": "USD",
+    "unit": "",
+    "timestamp": 1581445800,
+    "region": "americas",
+    "title": "Fed's Bullard discusses economy and monetary policy",
+    "impact": 2
+  },
+  {
+    "currency": "USD",
+    "unit": "",
+    "timestamp": 1581519600,
+    "region": "americas",
+    "title": "Fed's Powell testifies to Senate on monetary policy",
+    "impact": 2
+  },
+  {
+    "market": "210",
+    "actual": "205",
+    "region": "americas",
+    "currency": "USD",
+    "previous": "203",
+    "unit": "k",
+    "timestamp": 1581600600,
+    "title": "Initial Claims",
+    "impact": 2
+  },
+  {
+    "market": "0.200",
+    "actual": "0.100",
+    "region": "americas",
+    "currency": "USD",
+    "forecast": "0.2",
+    "previous": "0.200",
+    "unit": "% m/m",
+    "timestamp": 1581600600,
+    "title": "CPI",
+    "impact": 3
+  },
+  {
+    "market": "0.200",
+    "actual": "0.200",
+    "region": "americas",
+    "currency": "USD",
+    "forecast": "0.2",
+    "previous": "0.100",
+    "unit": "% m/m",
+    "timestamp": 1581600600,
+    "title": "CPI (ex Food & Energy)",
+    "impact": 3
+  },
+  {
+    "market": "0.400",
+    "actual": "0.300",
+    "region": "americas",
+    "currency": "USD",
+    "forecast": "0.3",
+    "previous": "0.600",
+    "unit": "% m/m",
+    "timestamp": 1581687000,
+    "title": "Retail Sales (ex Autos)",
+    "impact": 3
+  },
+  {
+    "market": "0.300",
+    "actual": "0.300",
+    "region": "americas",
+    "currency": "USD",
+    "forecast": "0.3",
+    "previous": "0.200",
+    "unit": "% m/m",
+    "timestamp": 1581687000,
+    "title": "Retail Sales",
+    "impact": 3
+  },
+  {
+    "market": "99.400",
+    "actual": "100.900",
+    "region": "americas",
+    "currency": "USD",
+    "previous": "99.800",
+    "unit": "index",
+    "timestamp": 1581692400,
+    "title": "Univ of Mich Sentiment",
+    "impact": 2
+  },
+  {
+    "actual": "10.400",
+    "region": "europe",
+    "currency": "EUR",
+    "forecast": "22.5",
+    "previous": "25.600",
+    "unit": "index",
+    "timestamp": 1582020000,
+    "title": "ZEW (Economic Sentiment)",
+    "impact": 3
+  },
+  {
+    "market": "20",
+    "actual": "8.700",
+    "region": "europe",
+    "currency": "EUR",
+    "forecast": "22.5",
+    "previous": "26.700",
+    "unit": "index",
+    "timestamp": 1582020000,
+    "title": "ZEW (Economic Sentiment)",
+    "impact": 3
+  },
+  {
+    "market": "5",
+    "actual": "12.900",
+    "region": "americas",
+    "currency": "USD",
+    "previous": "4.800",
+    "unit": "index",
+    "timestamp": 1582032600,
+    "title": "Empire State Survey",
+    "impact": 2
+  },
+  {
+    "actual": "85.600",
+    "previous": "27.100",
+    "currency": "USD",
+    "unit": "USD bn",
+    "timestamp": 1582059600,
+    "region": "americas",
+    "title": "Net Long-term TICS Flows",
+    "impact": 1
+  },
+  {
+    "market": "1450",
+    "actual": "1551",
+    "region": "americas",
+    "currency": "USD",
+    "forecast": "1470",
+    "previous": "1420",
+    "unit": "k",
+    "timestamp": 1582119000,
+    "title": "Building Permits",
+    "impact": 2
+  },
+  {
+    "market": "1370",
+    "actual": "1567",
+    "region": "americas",
+    "currency": "USD",
+    "forecast": "1400",
+    "previous": "1626",
+    "unit": "k",
+    "timestamp": 1582119000,
+    "title": "Housing Starts",
+    "impact": 2
+  },
+  {
+    "market": "0.200",
+    "actual": "0.500",
+    "region": "americas",
+    "currency": "USD",
+    "forecast": "0.2",
+    "previous": "0.100",
+    "unit": "% m/m",
+    "timestamp": 1582119000,
+    "title": "PPI (ex Food & Energy)",
+    "impact": 2
+  },
+  {
+    "market": "0.100",
+    "actual": "0.500",
+    "region": "americas",
+    "currency": "USD",
+    "forecast": "0.2",
+    "previous": "0.200",
+    "unit": "% m/m",
+    "timestamp": 1582119000,
+    "title": "PPI",
+    "impact": 2
+  },
+  {
+    "currency": "USD",
+    "unit": "",
+    "timestamp": 1582138800,
+    "region": "americas",
+    "title": "FOMC minutes from January 29",
+    "impact": 3
+  },
+  {
+    "currency": "USD",
+    "unit": "",
+    "timestamp": 1582147800,
+    "region": "americas",
+    "title": "Fed's Barkin discusses monetary policy framework",
+    "impact": 1
+  },
+  {
+    "market": "9.800",
+    "actual": "9.800",
+    "region": "europe",
+    "currency": "EUR",
+    "previous": "9.900",
+    "unit": "index",
+    "timestamp": 1582182000,
+    "title": "GFK Consumer Sentiment",
+    "impact": 2
+  },
+  {
+    "market": "210",
+    "actual": "210",
+    "region": "americas",
+    "currency": "USD",
+    "previous": "206",
+    "unit": "k",
+    "timestamp": 1582205400,
+    "title": "Initial Claims",
+    "impact": 2
+  },
+  {
+    "market": "1.100",
+    "actual": "1.100",
+    "region": "europe",
+    "currency": "EUR",
+    "previous": "1.100",
+    "unit": "% y/y",
+    "timestamp": 1582279200,
+    "title": "HICP - Core",
+    "impact": 3
+  },
+  {
+    "market": "5.430",
+    "actual": "5.460",
+    "region": "americas",
+    "currency": "USD",
+    "forecast": "5.49",
+    "previous": "5.530",
+    "unit": "mn",
+    "timestamp": 1582297200,
+    "title": "Existing Home Sales",
+    "impact": 2
+  },
+  {
+    "market": "95.100",
+    "actual": "96.100",
+    "region": "europe",
+    "currency": "EUR",
+    "previous": "95.900",
+    "unit": "index",
+    "timestamp": 1582534800,
+    "title": "IFO Business Climate",
+    "impact": 3
+  },
+  {
+    "market": "132",
+    "actual": "130.700",
+    "region": "americas",
+    "currency": "USD",
+    "previous": "130.400",
+    "unit": "index",
+    "timestamp": 1582642800,
+    "title": "Consumer Confidence",
+    "impact": 2
+  },
+  {
+    "market": "710",
+    "actual": "764",
+    "region": "americas",
+    "currency": "USD",
+    "forecast": "725",
+    "previous": "708",
+    "unit": "k",
+    "timestamp": 1582729200,
+    "title": "New Home Sales",
+    "impact": 2
+  },
+  {
+    "market": "-1.100",
+    "actual": "-0.200",
+    "region": "americas",
+    "currency": "USD",
+    "forecast": "-1.9",
+    "previous": "2.900",
+    "unit": "% m/m",
+    "timestamp": 1582810200,
+    "title": "Durable Goods Orders",
+    "impact": 2
+  },
+  {
+    "market": "211",
+    "actual": "219",
+    "region": "americas",
+    "currency": "USD",
+    "previous": "211",
+    "unit": "k",
+    "timestamp": 1582810200,
+    "title": "Initial Claims",
+    "impact": 2
+  },
+  {
+    "market": "2.200",
+    "actual": "2.100",
+    "region": "americas",
+    "currency": "USD",
+    "forecast": "2.1",
+    "previous": "2.100",
+    "unit": "% q/q ann",
+    "timestamp": 1582810200,
+    "title": "GDP Annualized",
+    "impact": 2
+  },
+  {
+    "market": "3",
+    "actual": "5.200",
+    "region": "americas",
+    "currency": "USD",
+    "previous": "-4.300",
+    "unit": "% m/m",
+    "timestamp": 1582815600,
+    "title": "Pending Home Sales",
+    "impact": 2
+  },
+  {
+    "market": "4.500",
+    "actual": "-10",
+    "region": "europe",
+    "currency": "EUR",
+    "previous": "-2",
+    "unit": "k",
+    "timestamp": 1582880100,
+    "title": "Unemployment Change",
+    "impact": 2
+  },
+  {
+    "market": "5",
+    "actual": "5",
+    "region": "europe",
+    "currency": "EUR",
+    "previous": "5",
+    "unit": "%",
+    "timestamp": 1582880100,
+    "title": "Unemployment Rate (sa)",
+    "impact": 2
+  },
+  {
+    "market": "0.300",
+    "actual": "0.200",
+    "region": "americas",
+    "currency": "USD",
+    "forecast": "0.3",
+    "previous": "0.300",
+    "unit": "% m/m",
+    "timestamp": 1582896600,
+    "title": "Personal spending",
+    "impact": 2
+  },
+  {
+    "market": "-68.400",
+    "actual": "-65.500",
+    "region": "americas",
+    "currency": "USD",
+    "forecast": "-66.2",
+    "previous": "-68.300",
+    "unit": "USD bn",
+    "timestamp": 1582896600,
+    "title": "Advance Goods Trade Balance",
+    "impact": 2
+  },
+  {
+    "market": "46.200",
+    "actual": "49",
+    "region": "americas",
+    "currency": "USD",
+    "previous": "42.900",
+    "unit": "index",
+    "timestamp": 1582901100,
+    "title": "Chicago PMI",
+    "impact": 1
+  },
+  {
+    "market": "100.700",
+    "actual": "101",
+    "region": "americas",
+    "currency": "USD",
+    "previous": "100.900",
+    "unit": "index",
+    "timestamp": 1582902000,
+    "title": "Univ of Mich Sentiment",
+    "impact": 2
+  },
+  {
+    "market": "49.500",
+    "actual": "50.100",
+    "region": "americas",
+    "currency": "USD",
+    "forecast": "49.5",
+    "previous": "50.900",
+    "unit": "index",
+    "timestamp": 1583161200,
+    "title": "ISM Manufacturing",
+    "impact": 2
+  },
+  {
+    "market": "7.400",
+    "actual": "7.400",
+    "region": "europe",
+    "currency": "EUR",
+    "previous": "7.400",
+    "unit": "%",
+    "timestamp": 1583229600,
+    "title": "Unemployment",
+    "impact": 2
+  },
+  {
+    "market": "1.200",
+    "actual": "1.200",
+    "region": "europe",
+    "currency": "EUR",
+    "previous": "1.100",
+    "unit": "% y/y",
+    "timestamp": 1583229600,
+    "title": "HICP - Core",
+    "impact": 3
+  },
+  {
+    "actual": "1.250",
+    "previous": "1.750",
+    "currency": "USD",
+    "unit": "%",
+    "timestamp": 1583247600,
+    "region": "americas",
+    "title": "FOMC - Fed Funds Rate",
+    "impact": 3
+  },
+  {
+    "market": "0.900",
+    "actual": "0.900",
+    "region": "europe",
+    "currency": "EUR",
+    "previous": "-2",
+    "unit": "% m/m",
+    "timestamp": 1583305200,
+    "title": "Retail Sales",
+    "impact": 2
+  },
+  {
+    "market": "170",
+    "actual": "183",
+    "region": "americas",
+    "currency": "USD",
+    "forecast": "170",
+    "previous": "209",
+    "unit": "k",
+    "timestamp": 1583327700,
+    "title": "ADP Employment Survey",
+    "impact": 3
+  },
+  {
+    "market": "54.900",
+    "actual": "57.300",
+    "region": "americas",
+    "currency": "USD",
+    "forecast": "54",
+    "previous": "55.500",
+    "unit": "index",
+    "timestamp": 1583334000,
+    "title": "ISM Non-Manufacturing",
+    "impact": 3
+  },
+  {
+    "currency": "USD",
+    "unit": "",
+    "timestamp": 1583348400,
+    "region": "americas",
+    "title": 100
+    9129
+    100
+    9129
+    0
+    0
+    9129
+    0
+    0: 00
+    :
+    01
+    0: 00
+    :
+    01
+    --: --
+    :
+    --
+    7314,
+    "unit": "k",
+    "timestamp": 1583415000,
+    "title": "Initial Claims",
+    "impact": 2
+  },
+  {
+    "market": "-0.200",
+    "actual": "-0.200",
+    "region": "americas",
+    "currency": "USD",
+    "previous": "-0.200",
+    "unit": "",
+    "timestamp": 1583420400,
+    "title": "Durable Goods Orders",
+    "impact": 2
+  },
+  {
+    "market": "1.300",
+    "actual": "5.500",
+    "region": "europe",
+    "currency": "EUR",
+    "previous": "-2.100",
+    "unit": "% m/m",
+    "timestamp": 1583478000,
+    "title": "Factory orders (sa)",
+    "impact": 2
+  },
+  {
+    "market": "-46.100",
+    "actual": "-45.300",
+    "region": "americas",
+    "currency": "USD",
+    "previous": "-48.600",
+    "unit": "USD bn",
+    "timestamp": 1583501400,
+    "title": "Trade Balance",
+    "impact": 2
+  },
+  {
+    "market": "3.600",
+    "actual": "3.500",
+    "region": "americas",
+    "currency": "USD",
+    "forecast": "3.5",
+    "previous": "3.600",
+    "unit": "%",
+    "timestamp": 1583501400,
+    "title": "Unemployment",
+    "impact": 3
+  },
+  {
+    "market": "175",
+    "actual": "273",
+    "region": "americas",
+    "currency": "USD",
+    "forecast": "195",
+    "previous": "273",
+    "unit": "k",
+    "timestamp": 1583501400,
+    "title": "Non-farm Payrolls",
+    "impact": 3
+  }
+]

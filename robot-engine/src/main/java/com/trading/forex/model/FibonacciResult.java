@@ -2,15 +2,14 @@ package com.trading.forex.model;
 
 import com.trading.forex.common.model.Candle;
 import com.trading.forex.common.model.Way;
+import com.trading.forex.common.utils.CustomList;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by hsouidi on 12/15/2017.
@@ -32,75 +31,45 @@ public class FibonacciResult {
     private double ret_61_8;
     private double ret_76_4;
     private double ret_100;
+    private double ret_161_8;
+    private double ret_261_8;
+    private double ret_423_6;
+    private double ext_23_6;
+    private double ext_38_2;
     private double ext_261_8;
     private double ext_200;
     private double ext_161_8;
     private double ext_138_2;
     private double ext_100;
     private double ext_61_8;
+    private double ext_423_6;
     private Candle indexHigh;
     private Candle indexLow;
 
-    public String dateBeginEnd() {
-        Date begin;
-        Date end;
-        if (way == Way.CALL) {
-            begin = indexLow.date();
-            end = indexHigh.date();
-        } else {
-            begin = indexHigh.date();
-            end = indexLow.date();
-        }
-        return "Fibonacci BeginDate=" + DATE_FORMAT.format(begin) + ", EndDate=" + DATE_FORMAT.format(end);
-    }
-
     public Double getNextBarrier(double price, Way wayTrade) {
-        return getNextBarrier(price, wayTrade, false);
-    }
-
-    public Double getNextBarrier(double price, Way wayTrade, boolean beforePrice) {
         List<Double> barries = Arrays.asList(
                 ret_0,
                 ret_23_6,
                 ret_38_2,
                 ret_50,
                 ret_61_8,
-                ret_76_4,
-                ret_100);
+                //ret_76_4,
+                ret_100,
+                ret_161_8,
+                ret_261_8,
+                ret_423_6);
 
-        int size = barries.size();
-        Double preBarrier;
-        Double barrier = null;
-        if (wayTrade == Way.CALL) {
-            for (int i = 0; i < size; i++) {
-                preBarrier = barrier;
-                barrier = barries.get(i);
-                if (!beforePrice && barrier > price) {
-                    return barrier;
-
-                } else if (beforePrice && barrier > price) {
-                    return preBarrier == null ? barrier : preBarrier;
-                }
-            }
+        if (wayTrade == Way.BUY) {
+            return barries.stream().filter(p -> p - price >= 0).findFirst().orElse(null);
         } else {
             inverse(barries);
-            for (int i = size - 1; i >= 0; i--) {
-                preBarrier = barrier;
-                barrier = barries.get(i);
-                if (!beforePrice && barrier < price) {
-                    return barrier;
-
-                } else if (beforePrice && barrier < price) {
-                    return preBarrier == null ? barrier : preBarrier;
-                }
-            }
+            return barries.stream().filter(p -> p - price <= 0).findFirst().orElse(null);
         }
-        return null;
     }
 
     private void inverse(List input) {
         int size = input.size();
-        int fromEndIndex=size - 1;
+        int fromEndIndex = size - 1;
         for (int j = 0; fromEndIndex > j; fromEndIndex--, j++) {
             Object tmp = input.get(fromEndIndex);
             input.set(fromEndIndex, input.get(j));
@@ -118,40 +87,96 @@ public class FibonacciResult {
                 ret_0,
                 ret_23_6,
                 ret_38_2,
-                ret_50
-                ,
+                ret_50,
                 ret_61_8,
-                ret_76_4,
-                ret_100
+                //ret_76_4,
+                ret_100,
+                ret_161_8,
+                ret_261_8,
+                ret_423_6
         );
-        Double preBarrier;
-        Double barrier = null;
-        int size = barries.size();
-        if (wayTrade == Way.CALL) {
-            for (int i = 0; i < size; i++) {
-                preBarrier = barrier;
-                barrier = barries.get(i);
-                if (!beforePrice && barrier < price) {
-                    return barrier;
 
-                } else if (beforePrice && barrier < price) {
-                    return preBarrier == null ? barrier : preBarrier;
-                }
-            }
+        if (wayTrade == Way.BUY) {
+            return barries.stream().filter(p -> p - price <= 0).findFirst().orElse(null);
         } else {
             inverse(barries);
-            for (int i = size - 1; i >= 0; i--) {
-                preBarrier = barrier;
-                barrier = barries.get(i);
-                if (!beforePrice && barrier > price) {
-                    return barrier;
+            return barries.stream().filter(p -> p - price >= 0).findFirst().orElse(null);
+        }
+    }
 
-                } else if (beforePrice && barrier > price) {
-                    return preBarrier == null ? barrier : preBarrier;
-                }
 
+    public CustomList<Placement> getPlacementHistory(List<Candle> candles) {
+        List<Map.Entry<FiboLevel, Double>> barries = Arrays.asList(
+                new AbstractMap.SimpleEntry(FiboLevel.ret_0, ret_0),
+                new AbstractMap.SimpleEntry(FiboLevel.ret_23_6, ret_23_6),
+                new AbstractMap.SimpleEntry(FiboLevel.ret_38_2, ret_38_2),
+                new AbstractMap.SimpleEntry(FiboLevel.ret_50, ret_50),
+                new AbstractMap.SimpleEntry(FiboLevel.ret_61_8, ret_61_8),
+                //ret_76_4,
+                new AbstractMap.SimpleEntry(FiboLevel.ret_100, ret_100),
+                new AbstractMap.SimpleEntry(FiboLevel.ret_161_8, ret_161_8),
+                new AbstractMap.SimpleEntry(FiboLevel.ret_261_8, ret_261_8),
+                new AbstractMap.SimpleEntry(FiboLevel.ret_423_6, ret_423_6),
+                // ext
+                new AbstractMap.SimpleEntry(FiboLevel.ext_423_6, ext_423_6),
+                new AbstractMap.SimpleEntry(FiboLevel.ext_261_8, ext_261_8),
+                new AbstractMap.SimpleEntry(FiboLevel.ext_200, ext_200),
+                new AbstractMap.SimpleEntry(FiboLevel.ext_161_8, ext_161_8),
+                new AbstractMap.SimpleEntry(FiboLevel.ext_138_2, ext_138_2),
+                new AbstractMap.SimpleEntry(FiboLevel.ext_100, ext_100),
+                new AbstractMap.SimpleEntry(FiboLevel.ext_61_8, ext_61_8),
+                new AbstractMap.SimpleEntry(FiboLevel.ext_23_6, ext_23_6),
+                new AbstractMap.SimpleEntry(FiboLevel.ext_38_2, ext_38_2)
+        );
+
+        CustomList<Placement> result = new CustomList<>();
+
+        for (Candle candle : candles) {
+
+            Placement placement = result.getLast();
+            Map.Entry<FiboLevel, Double> above = barries.stream().filter(p -> p.getValue() > candle.getClose()).min(Comparator.comparing(Map.Entry::getValue)).get();
+            Map.Entry<FiboLevel, Double> bellow = barries.stream().filter(p -> p.getValue() < candle.getClose()).max(Comparator.comparing(Map.Entry::getValue)).get();
+            if (placement != null && placement.above.equals(above) && placement.bellow.equals(bellow)) {
+                placement.setWeight(placement.weight + 1);
+            } else {
+                result.add(new Placement(1, above, bellow));
             }
         }
-        return null;
+        return result;
+
+
     }
+
+    @Data
+    @AllArgsConstructor
+    @Builder
+    @NoArgsConstructor
+    public static class Placement {
+        int weight;
+        Map.Entry<FiboLevel, Double> above;
+        Map.Entry<FiboLevel, Double> bellow;
+    }
+
+    enum FiboLevel {
+        ret_0,
+        ret_23_6,
+        ret_38_2,
+        ret_50,
+        ret_61_8,
+        ret_100,
+        ret_161_8,
+        ret_261_8,
+        ret_423_6,
+        ext_261_8,
+        ext_200,
+        ext_161_8,
+        ext_138_2,
+        ext_100,
+        ext_61_8,
+        ext_423_6,
+        ext_23_6,
+        ext_38_2
+    }
+
+
 }

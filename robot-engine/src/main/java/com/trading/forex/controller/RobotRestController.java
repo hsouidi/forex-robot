@@ -7,32 +7,41 @@ package com.trading.forex.controller;
 import com.trading.forex.common.exceptions.RobotTechnicalException;
 import com.trading.forex.connector.service.PositionService;
 import com.trading.forex.model.Status;
-import com.trading.forex.schedule.ScheduleBookingService;
+import com.trading.forex.model.TradeHistoryResponse;
 import com.trading.forex.service.BalanceService;
+import com.trading.forex.service.RobotConfigurationService;
+import com.trading.forex.service.RobotReportService;
+import com.trading.forex.service.TradeHistoryService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
 @RestController
 @CrossOrigin
-@PreAuthorize("hasAuthority('TRADER')")
+//@PreAuthorize("hasAuthority('TRADER')")
 @RequestMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.ALL_VALUE)
 public class RobotRestController {
 
 
     @Autowired
-    private ScheduleBookingService scheduleBookingService;
+    private RobotConfigurationService robotConfigurationService;
 
+    @Autowired
+    private RobotReportService robotReportService;
     @Autowired
     private BalanceService balanceService;
 
     @Autowired
     private PositionService positionService;
+
 
     @RequestMapping(value = "action/{action}", method = RequestMethod.GET)
     public String action(@PathVariable String action) {
@@ -41,10 +50,10 @@ public class RobotRestController {
             case "limit":
                 break;
             case "stop":
-                scheduleBookingService.setRunBooking(false);
+                robotConfigurationService.setRunBookingManuel(false);
                 break;
             case "start":
-                scheduleBookingService.setRunBooking(true);
+                robotConfigurationService.setRunBookingManuel(true);
                 break;
             case "close":
                 positionService.closeOpenedPosition();
@@ -59,28 +68,16 @@ public class RobotRestController {
     @RequestMapping(value = "payout/{payout}", method = RequestMethod.POST)
     public void setPayout(@PathVariable Double payout) {
         log.info("Set Unit :" + payout);
-        scheduleBookingService.setUnit(payout.intValue());
+        robotConfigurationService.setUnit(payout);
     }
 
     @RequestMapping(value = "status", method = RequestMethod.GET)
     @ResponseBody
     public Status status() {
-        log.info("Execute Action : status");
-        return Status.builder().inverse(false)
-                .maxLoss(Optional.ofNullable(balanceService.getMaxloss()).orElse(0.0))
-                .maxProfit(Optional.ofNullable(balanceService.getMaxProfit()).orElse(0.0))
-                .mode(scheduleBookingService.getMode())
-                .solde(Optional.ofNullable(balanceService.getSolde()).orElse(0.0))
-                .serverStatus(Optional.ofNullable(scheduleBookingService.getRunBooking()).orElse(Boolean.FALSE))
-                .strategy("Investing")
-                .limit(false)
-                .nbOpenedTransaction(positionService.getOpenedPositions().size())
-                .payout(Double.valueOf(scheduleBookingService.getUnit()))
-                .positionProfit(positionService.getProfitOpenedPositions())
-                .coverage(false)
-                .build();
+        return robotReportService.status();
 
     }
+
 
     @RequestMapping(value = "solde/reset", method = RequestMethod.POST)
     public void reset() {

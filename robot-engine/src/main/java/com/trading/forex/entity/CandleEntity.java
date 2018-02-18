@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,9 +22,9 @@ import java.util.stream.Collectors;
 @Data
 @Builder
 @Entity
-@NoArgsConstructor
 @AllArgsConstructor
-public class CandleEntity {
+@NoArgsConstructor
+public class CandleEntity implements Serializable {
 
 
     @EmbeddedId
@@ -50,10 +51,10 @@ public class CandleEntity {
     }
 
     public static List<CandleEntity> build(List<Candle> candles, CandlestickGranularity candlestickGranularity, Symbol symbol) {
-        return candles.parallelStream().map(candle -> build(candle,candlestickGranularity, symbol)).collect(Collectors.toList());
+        return candles.parallelStream().map(candle -> build(candle, candlestickGranularity, symbol)).collect(Collectors.toList());
     }
 
-    public static CandleEntity build(Candle candle,CandlestickGranularity candlestickGranularity, Symbol symbol) {
+    public static CandleEntity build(Candle candle, CandlestickGranularity candlestickGranularity, Symbol symbol) {
         return CandleEntity.builder().key(Key.builder().epoch(candle.getEpoch()).symbol(symbol)
                 .candlestickGranularity(candlestickGranularity).build())
                 .close(candle.getClose())
@@ -71,6 +72,7 @@ public class CandleEntity {
     public static Candle toCandle(CandleEntity candle) {
         return Candle.builder()
                 .epoch(candle.getKey().epoch)
+                .date(new Date(candle.getKey().epoch))
                 .close(candle.getClose())
                 .high(candle.getHigh())
                 .low(candle.getLow())
@@ -79,7 +81,6 @@ public class CandleEntity {
                 .symbol(candle.getKey().getSymbol())
                 .build();
     }
-
 
 
 }

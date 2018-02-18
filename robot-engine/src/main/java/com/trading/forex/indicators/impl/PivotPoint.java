@@ -1,21 +1,43 @@
 package com.trading.forex.indicators.impl;
 
 import com.trading.forex.common.model.Candle;
+import com.trading.forex.common.utils.CustomList;
 import com.trading.forex.model.PivotPointResult;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Created by hsouidi on 11/28/2017.
  */
+@Slf4j
 public class PivotPoint {
 
 
-    public static PivotPointResult calcul(Candle jm1Candle) {
+    public static PivotPointResult calcul(CustomList<Candle> candles) {
 
-        double c = jm1Candle.getClose();
-        double h = jm1Candle.getHigh();
-        double l = jm1Candle.getLow();
+        final Candle last=candles.getLast();
+        double low=last.getLow();
+        double high=last.getHigh();
+        for(Candle candle:candles){
+            if(candle.getLow()<low){
+                low=candle.getLow();
+            }
+            if(candle.getHigh()>high){
+                high=candle.getHigh();
+            }
+       }
 
-        double pivot = (l + h + c) / 3;
+       return calcul(last.getClose(),high,low);
+
+    }
+
+
+    public static PivotPointResult calcul(Candle jm1Candle){
+            return calcul(jm1Candle.getClose(),jm1Candle.getHigh(),jm1Candle.getLow());
+    }
+
+    private  static PivotPointResult calcul(double c,double h,double l) {
+        log.info("Calcul point pivot  close={} , high={}  , low={}",c,h,l);
+        double pivot = (l + h + c ) / 3;
 
         double s1 = (pivot * 2) - h;
         double s2 = pivot - (h - l);
@@ -33,20 +55,6 @@ public class PivotPoint {
         double pr2 = 100 * (r2 - c) / c;
         double pr3 = 100 * (r3 - c) / c;
 
-        return PivotPointResult.builder()
-                .pivot(pivot)
-                .r1(r1)
-                .pr1(pr1)
-                .r2(r2)
-                .pr2(pr2)
-                .r3(r3)
-                .pr3(pr3)
-                .s1(s1)
-                .ps1(ps1)
-                .s2(s2)
-                .ps2(ps2)
-                .s3(s3)
-                .ps3(ps3)
-                .build();
+        return new PivotPointResult( r1,  r2,  r3,  s1,  s2,  s3,  pivot,  pr1,  pr2,  pr3,  ps1,  ps2,  ps3);
     }
 }

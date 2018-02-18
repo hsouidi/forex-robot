@@ -15,6 +15,8 @@ public class OrderCreateResponse {
     private Double takeProfit;
     private Double stopLoss;
     private Way way;
+    private OrderStatus orderStatus;
+    private String comment;
 
 }
 

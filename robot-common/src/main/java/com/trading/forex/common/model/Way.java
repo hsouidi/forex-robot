@@ -7,7 +7,7 @@ import lombok.Getter;
  */
 @Getter
 public enum Way {
-    PUT(-1), CALL(1),NEUTRE(0);
+    SELL(-1), BUY(1), NEUTRE(0);
     int value;
 
 
@@ -15,9 +15,17 @@ public enum Way {
         this.value = value;
     }
 
+    public static Way safeValueOf(final String name) {
+        try {
 
+            return valueOf(name.toUpperCase());
+
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
+    }
 
     public Way inverse() {
-        return this.equals(PUT) ? CALL : PUT;
+        return this.equals(SELL) ? BUY : SELL;
     }
 }

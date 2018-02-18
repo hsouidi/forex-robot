@@ -10,7 +10,7 @@ import java.text.SimpleDateFormat;
 @AllArgsConstructor
 public class Swing implements Comparable<Swing> {
 
-    private static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 
     private Double pip;
     private Double price;

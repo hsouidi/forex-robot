@@ -14,4 +14,8 @@ public interface BalanceService {
     void updateBalanceInfos();
 
     void reset();
+
+    Double getMaxPosition();
+
+    Double getMinPosition();
 }

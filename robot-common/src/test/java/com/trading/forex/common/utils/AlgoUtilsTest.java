@@ -4,7 +4,8 @@ import com.trading.forex.common.model.CandlestickGranularity;
 import com.trading.forex.common.model.Symbol;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
 
 public class AlgoUtilsTest {
 
@@ -37,6 +38,18 @@ public class AlgoUtilsTest {
         long timestamp=AlgoUtils.candlestickGranularityToTimeStamp(CandlestickGranularity.M);
         // Then
         assertEquals(timestamp,2678400000L);
+
+    }
+
+
+
+    @Test
+    public void testGetDelai() {
+        // Given
+        // When
+        Long epoch=AlgoUtils.getDelay(60);
+        // Then
+        assertNotNull(epoch);
 
     }
 }

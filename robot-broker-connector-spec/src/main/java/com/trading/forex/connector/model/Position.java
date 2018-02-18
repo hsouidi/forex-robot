@@ -15,4 +15,5 @@ public class Position {
     private Double commission;
     private Double longValue;
     private Double shortValue;
+
 }

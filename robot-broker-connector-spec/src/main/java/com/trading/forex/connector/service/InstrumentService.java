@@ -17,4 +17,6 @@ public interface InstrumentService {
 
     CustomList<Candle> getPricing(CandlestickGranularity candlestickGranularity, Symbol symbol, Date to, Date from);
 
+    CustomList<Candle> getPricingHeinkin(CandlestickGranularity candlestickGranularity, Symbol symbol, Date to, Date from);
+
 }

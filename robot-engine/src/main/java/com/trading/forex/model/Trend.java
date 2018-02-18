@@ -3,7 +3,11 @@ package com.trading.forex.model;
 import com.trading.forex.common.model.Candle;
 import com.trading.forex.common.model.Symbol;
 import com.trading.forex.common.utils.CustomList;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
+import java.util.List;
+import java.util.function.Function;
 
 import static com.trading.forex.common.utils.AlgoUtils.isCrossPrice;
 import static com.trading.forex.common.utils.AlgoUtils.toPip;
@@ -13,7 +17,11 @@ import static com.trading.forex.indicators.impl.MovingAverage.valuesEma;
 
 public enum Trend {
 
-    BULLISH, BEARISH, RANGE;
+    UP, DOWN, RANGE,UNKNOWN;
+
+    public Trend inverse(){
+        return this==RANGE||this==UNKNOWN?null:this== UP ? DOWN : UP;
+    }
 
     public static Trend getTrend(CustomList<Candle> candles, Symbol symbol) {
 
@@ -47,13 +55,70 @@ public enum Trend {
         if (diffEma5 > threshold && diffEma26 > threshold && diffEma100 > threshold && diffEma300 > threshold
                 && diffEma600 > threshold && diffEma1000 > threshold
                 ) {
-            return Trend.BULLISH;
+            return Trend.UP;
 
         } else if (diffEma5 < -threshold && diffEma26 < -threshold && diffEma100 < -threshold && diffEma300 < -threshold
                 && diffEma600 < -threshold && diffEma1000 < -threshold
                 ) {
-            return Trend.BEARISH;
+            return Trend.DOWN;
         }
         return Trend.RANGE;
     }
+
+
+    private static Trend calculGlobalTrend(CustomList<TrendInfo> trendInfos) {
+
+        double trendBullishNb = 0;
+        double trendBurrishNb = 0;
+        final double threshold=55D;
+        int all = 0;
+        for (TrendInfo trendInfo : trendInfos) {
+            all += trendInfo.weight;
+            if (trendInfo.getTrend() == UP) {
+                trendBullishNb += trendInfo.weight;
+            } else if (trendInfo.getTrend() == DOWN) {
+                trendBurrishNb += trendInfo.weight;
+            }
+        }
+        double trendBullishInPerc=(trendBullishNb/all)*100;
+        double trendBurrishNbInPerc=(trendBurrishNb/all)*100;
+
+        return trendBullishInPerc>threshold?Trend.UP :trendBurrishNbInPerc>threshold?Trend.UP : Trend.RANGE;
+
+    }
+
+    private static CustomList<TrendInfo> getTrendInfos(List<Integer> elements, List<Candle> candles, Function<Candle, Double> candlePriceFunc) {
+        int up = 0;
+        int down = 0;
+        final CustomList<TrendInfo> trendInfos = new CustomList<>();
+
+        for (int index = 1; index < elements.size(); index++) {
+            Double candle = candlePriceFunc.apply(candles.get(index));
+            Double candleMinus1 = candlePriceFunc.apply(candles.get(index - 1));
+            if (candle.compareTo(candleMinus1) > 0) {
+                if (down > 0) {
+                    trendInfos.add(new TrendInfo(Trend.UP, down));
+                    down = 0;
+                }
+                up++;
+
+            } else if (candle.compareTo(candleMinus1) < 0) {
+                if (up > 0) {
+                    trendInfos.add(new TrendInfo(Trend.DOWN, up));
+                    up = 0;
+                }
+                down++;
+            }
+        }
+        return trendInfos;
+    }
+
+    @Data
+    @AllArgsConstructor
+    public static class TrendInfo {
+        private Trend trend;
+        private Integer weight;
+    }
+
+
 }
